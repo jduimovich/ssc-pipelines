@@ -1,1 +1,1 @@
-oc apply -f pipelines 
+oc apply -f gitops 
