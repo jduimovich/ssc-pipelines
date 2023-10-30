@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:  
-  name: advanced-ssc-rhtab-docker-2
+  name: advanced-ssc-rhtab-docker
   namespace: openshift 
   labels:
     operator.tekton.dev/operand-name: openshift-pipelines-addons

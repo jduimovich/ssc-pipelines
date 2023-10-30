@@ -1,11 +1,12 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
-metadata: 
-  name: advanced-ssc-container-builder-java
+metadata:  
+  name: advanced-ssc-rhtab-docker-3
   namespace: openshift 
-  labels: 
+  labels:
+    operator.tekton.dev/operand-name: openshift-pipelines-addons
     pipeline.openshift.io/strategy: docker
-    pipeline.openshift.io/type: openshift
+    pipeline.openshift.io/type: kubernetes
 spec:
   params:
     - name: APP_NAME
@@ -52,28 +53,10 @@ spec:
       workspaces:
         - name: source
           workspace: workspace
-    - name: do-some-ssc-stuff
-      params:
-        - name: SCRIPT
-          value: echo "do some ssc stuff"
-      runAfter:
-        - build
-      taskRef:
-        kind: ClusterTask
-        name: openshift-client
-    - name: do-some-ec-stuff
-      params:
-        - name: SCRIPT
-          value: echo "do some ec stuff"
-      runAfter:
-        - build
-      taskRef:
-        kind: ClusterTask
-        name: openshift-client
     - name: deploy
       params:
         - name: SCRIPT
-          value: oc rollout status dc/$(params.APP_NAME)
+          value: oc rollout status deploy/$(params.APP_NAME)
       runAfter:
         - build
       taskRef:
