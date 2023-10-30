@@ -53,6 +53,33 @@ spec:
       workspaces:
         - name: source
           workspace: workspace
+    - name: ec-thing-1
+      params:
+        - name: SCRIPT
+          value: "echo ec-thing-1"
+      runAfter:
+        - build
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+    - name: ec-thing-2
+      params:
+        - name: SCRIPT
+          value: "echo ec-thing-2"
+      runAfter:
+        - ec-thing-1
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+    - name: ec-thing-3
+      params:
+        - name: SCRIPT
+          value: "echo ec-thing-3"
+      runAfter:
+        - ec-thing-2
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
     - name: deploy
       params:
         - name: SCRIPT
