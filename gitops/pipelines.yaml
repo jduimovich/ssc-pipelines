@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     path: pipelines
-    repoURL: https://github.com/jduimovich/ssc-pipelines
+    repoURL: https://github.com/jduimovich/ssc-pipelines.git
     targetRevision: main
   destination:
     namespace: openshift
